@@ -8,10 +8,9 @@ public class Movement : MonoBehaviour
     [SerializeField] float thrustStrength = 100f;
     [SerializeField] float rotationStrength = 100f;
     [SerializeField] AudioClip mainEngineSFX;
-
-    [SerializeField] ParticleSystem thrustParticle;
-    [SerializeField] ParticleSystem leftThrustParticle;
-    [SerializeField] ParticleSystem rightThrustParticle;
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem rightThrustParticles;
+    [SerializeField] ParticleSystem leftThrustParticles;
 
     Rigidbody rb;
     AudioSource audioSource;
@@ -36,82 +35,82 @@ public class Movement : MonoBehaviour
 
     private void ProcessThrust()
     {
-        StartThrusting();
+        if (thrust.IsPressed())
+        {
+            StartThrusting();
+        }
+        else
+        {
+            StopThrusting();
+        }
     }
-    private void ProcessRotation()
-    {
-        StartRotation();
-    }
-
-
-    private void ApplyRotation(float rotateThisFrame)
-    {
-        rb.freezeRotation = true;
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-        transform.Rotate(Vector3.forward * rotateThisFrame * Time.fixedDeltaTime);
-        rb.freezeRotation = false;
-
-    }
-
 
     private void StartThrusting()
     {
-        if (thrust.IsPressed())
+        rb.AddRelativeForce(Vector3.up * thrustStrength * Time.fixedDeltaTime);
+        if (!audioSource.isPlaying)
         {
-            rb.AddRelativeForce(Vector3.up * thrustStrength * Time.fixedDeltaTime);
-            thrustParticle.Play();
-
-
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngineSFX);
-            }
-
-            if (thrustParticle.isPlaying)
-            {
-                thrustParticle.Play();
-            }
-
+            audioSource.PlayOneShot(mainEngineSFX);
         }
-        else
+        if (!mainEngineParticles.isPlaying)
         {
-            audioSource.Stop();
-            thrustParticle.Stop();
+            mainEngineParticles.Play();
         }
     }
-    private void StartRotation()
+
+    private void StopThrusting()
+    {
+        audioSource.Stop();
+        mainEngineParticles.Stop();
+    }
+
+    private void ProcessRotation()
     {
         float rotationInput = rotation.ReadValue<float>();
-
         if (rotationInput < 0)
         {
-            ApplyRotation(rotationStrength);
-
-            if (!rightThrustParticle.isPlaying)
-            {
-                leftThrustParticle.Stop();
-                rightThrustParticle.Play();
-            }
+            RotateRight();
         }
-
         else if (rotationInput > 0)
         {
-            ApplyRotation(-rotationStrength);
-
-
-            if (!leftThrustParticle.isPlaying)
-            {
-                leftThrustParticle.Play();
-                rightThrustParticle.Stop();
-            }
-
-
+            RotateLeft();
         }
-
         else
         {
-            leftThrustParticle.Stop();
-            rightThrustParticle.Stop();
+            StopRotating();
         }
+    }
+
+    private void RotateRight()
+    {
+        ApplyRotation(rotationStrength);
+        if (!rightThrustParticles.isPlaying)
+        {
+            leftThrustParticles.Stop();
+            rightThrustParticles.Play();
+        }
+    }
+
+    private void RotateLeft()
+    {
+        ApplyRotation(-rotationStrength);
+        if (!leftThrustParticles.isPlaying)
+        {
+            rightThrustParticles.Stop();
+            leftThrustParticles.Play();
+        }
+    }
+
+    private void StopRotating()
+    {
+        rightThrustParticles.Stop();
+        leftThrustParticles.Stop();
+    }
+
+    private void ApplyRotation(float rotationThisFrame)
+    {
+        rb.freezeRotation = true;
+        transform.Rotate(Vector3.forward * rotationThisFrame * Time.fixedDeltaTime);
+        rb.freezeRotation = false;
     }
 }

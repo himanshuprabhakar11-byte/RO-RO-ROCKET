@@ -101,6 +101,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 12.598
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 953fe30c7b4888b418f3afc42ceefee8, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d04743978ecb64544a28160b59e350a7, type: 2}
     - target: {fileID: 919132149155446097, guid: 953fe30c7b4888b418f3afc42ceefee8, type: 3}
       propertyPath: m_Name
       value: Fighter_04_Detail_1_Blue
@@ -615,6 +619,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -3.336
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 33bc3880cd97be34ab3c482af7bb304e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 58c276c8a41b0204a85aea1252d799a1, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 33bc3880cd97be34ab3c482af7bb304e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d04743978ecb64544a28160b59e350a7, type: 2}
     - target: {fileID: 919132149155446097, guid: 33bc3880cd97be34ab3c482af7bb304e, type: 3}
       propertyPath: m_Name
       value: Fighter_02_Thruster
