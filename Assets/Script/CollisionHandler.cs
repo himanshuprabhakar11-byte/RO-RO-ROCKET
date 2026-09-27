@@ -1,3 +1,5 @@
+
+
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,31 +12,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] float levelLoadDelay = 2;
     [SerializeField] AudioClip successSFX;
     [SerializeField] AudioClip crashSFX;
-    [SerializeField] ParticleSystem successParticles ;
-    [SerializeField] ParticleSystem crashParticles ;
-
-
-
-
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
 
     AudioSource audioSource;
 
     bool isControllable = true;
     bool isCollidable = true;
 
-
-
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-      
-
-
     }
 
     private void Update()
     {
-       RespondToDebugKey();
+        RespondToDebugKey();
     }
 
     void RespondToDebugKey()
@@ -46,11 +39,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         else if (Keyboard.current.cKey.wasPressedThisFrame)
         {
             isCollidable = !isCollidable;
-            Debug.Log("C key is Pressed");
         }
-
     }
-
 
     private void OnCollisionEnter(Collision other)
     {
@@ -59,23 +49,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("Everything is looking good!");
                 break;
             case "Finish":
-                
                 StartSuccessSequence();
                 break;
-            case "Fuel":
-                Debug.Log("Dabdi dabdi go!!!");
-                break;
-
+            
             default:
                 StartCrashSequence();
                 break;
-               
-
         }
-
     }
 
     void StartSuccessSequence()
@@ -88,8 +70,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         Invoke("LoadNextLevel", levelLoadDelay);
     }
 
-
-
     void StartCrashSequence()
     {
         isControllable = false;
@@ -98,8 +78,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         crashParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", levelLoadDelay);
-
     }
+
     void LoadNextLevel()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
@@ -111,10 +91,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
 
         SceneManager.LoadScene(nextScene);
-
     }
-
-
 
 
 
@@ -123,8 +100,5 @@ public class NewMonoBehaviourScript : MonoBehaviour
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
     }
-
-
-
 
 }

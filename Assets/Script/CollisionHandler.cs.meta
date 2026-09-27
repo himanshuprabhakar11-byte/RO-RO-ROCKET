@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 3180ff6d54a22ee4186ac92751261674
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - successSFX: {fileID: 8300000, guid: d122d737aeb40c941a3f3c01b21422e8, type: 3}
+  - crashSFX: {fileID: 8300000, guid: 55531ae82db40bf42837545c5b0a1274, type: 3}
+  - successParticles: {fileID: 198631066050499358, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
+  - crashParticles: {fileID: 198204746014789312, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
