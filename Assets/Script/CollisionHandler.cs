@@ -23,24 +23,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+       
     }
 
-    private void Update()
-    {
-        RespondToDebugKey();
-    }
+   
 
-    void RespondToDebugKey()
-    {
-        if (Keyboard.current.lKey.isPressed)
-        {
-            LoadNextLevel();
-        }
-        else if (Keyboard.current.cKey.wasPressedThisFrame)
-        {
-            isCollidable = !isCollidable;
-        }
-    }
+   
 
     private void OnCollisionEnter(Collision other)
     {

@@ -23,12 +23,4 @@ public class Oscillator : MonoBehaviour
         
     }
 
-
-
-
-
-
-
-
-
 }
